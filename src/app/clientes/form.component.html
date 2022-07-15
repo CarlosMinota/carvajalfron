@@ -1,0 +1,100 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+    {{err}}
+  </li>
+</ul>
+
+<div class="card bg-dark text-white">
+  <div class="card-header">
+    {{titulo}}
+  </div>
+  <div class="card-body">
+    <form class="row g-3" #clienteForm="ngForm">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Nombres</label>
+        <input type="text" class="form-control" name="inputEmail4" [(ngModel)]="cliente.nombres" #nombres="ngModel">
+        <div class="alert alert-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
+          <div *ngIf="nombres.hasError('required')">
+            El nombre es obligatorio
+          </div>
+          <div *ngIf="nombres.hasError('minlength')">
+            El nombre tiene que ser mayor a los 4 caracteres
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Apellidos</label>
+        <input type="text" class="form-control" name="inputPassword4" [(ngModel)]="cliente.apellidos"
+          #apellidos="ngModel">
+        <div class="alert alert-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
+          <div *ngIf="apellidos.hasError('required')">
+            El apellido es obligatorio
+          </div>
+          <div *ngIf="apellidos.hasError('minlength')">
+            El apellido tiene que ser mayor a los 4 caracteres
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Email</label>
+        <input type="email" class="form-control" name="inputAddress" [(ngModel)]="cliente.email" #email="ngModel">
+        <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+          <div *ngIf="email.hasError('required')">
+            El email es obligatorio
+          </div>
+          <div *ngIf="email.hasError('email')">
+            El email debe tener un formato valido
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress2" class="form-label">Telefono</label>
+        <input type="text" class="form-control" name="inputAddress2" [(ngModel)]="cliente.telefono" #telefono="ngModel">
+        <div class="alert alert-danger" *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)">
+          <div *ngIf="telefono.hasError('required')">
+            El telefono es obligatorio
+          </div>
+          <div *ngIf="telefono.hasError('minlength')">
+            El telefono debe tener un formato valido
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">Celular</label>
+        <input type="text" class="form-control" name="inputCity" [(ngModel)]="cliente.celular" #celular="ngModel">
+        <div class="alert alert-danger" *ngIf="celular.invalid && (celular.dirty || celular.touched)">
+          <div *ngIf="celular.hasError('required')">
+            El celular es obligatorio
+          </div>
+          <div *ngIf="celular.hasError('minlength')">
+            El celular debe tener un formato valido
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="inputZip" class="form-label">Cedula</label>
+        <input type="text" class="form-control" name="inputZip" [(ngModel)]="cliente.cedula" #cedula="ngModel">
+        <div class="alert alert-danger" *ngIf="cedula.invalid && (cedula.dirty || cedula.touched)">
+          <div *ngIf="cedula.hasError('required')">
+            El cedula es obligatorio
+          </div>
+          <div *ngIf="cedula.hasError('minlength')">
+            El cedula debe tener un formato valido
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-group-row">
+          <div class="col-sm-6">
+            <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!cliente.id else elseBlock"
+              [disabled]="!clienteForm.form.valid">Crear</button>
+            <ng-template #elseBlock>
+              <button class="btn btn-primary" role="button" (click)="update()"
+                [disabled]="!clienteForm.form.valid">Editar</button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
